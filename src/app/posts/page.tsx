@@ -2,11 +2,12 @@ import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
 
 import { client } from "@/sanity/client";
+import { ContentCard } from "@/components/cards/contentCard";
 
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image}`;
 
 const options = { next: { revalidate: 30 } };
 
@@ -19,16 +20,18 @@ export default async function PostsPage() {
         ← Back to home
       </Link>
       <h1 className="text-4xl font-bold mb-8">Posts</h1>
-      <ul className="flex flex-col gap-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {posts.map((post) => (
-          <li className="hover:underline" key={post._id}>
-            <Link href={`/posts/${post.slug.current}`}>
-              <h2 className="text-xl font-semibold">{post.title}</h2>
-              <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
-            </Link>
-          </li>
+          <ContentCard
+            key={post._id}
+            title={post.title}
+            publishedAt={post.publishedAt}
+            slug={post.slug.current}
+            image={post.image}
+            basePath="posts"
+          />
         ))}
-      </ul>
+      </div>
     </main>
   );
 }

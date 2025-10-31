@@ -2,11 +2,12 @@ import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
 
 import { client } from "@/sanity/client";
+import { ContentCard } from "@/components/cards/contentCard";
 
 const WORKSHOPS_QUERY = `*[
   _type == "workshop"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image}`;
 
 const options = { next: { revalidate: 30 } };
 
@@ -23,16 +24,18 @@ export default async function WorkshopsPage() {
         ← Back to home
       </Link>
       <h1 className="text-4xl font-bold mb-8">Workshops</h1>
-      <ul className="flex flex-col gap-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {workshops.map((workshop) => (
-          <li className="hover:underline" key={workshop._id}>
-            <Link href={`/workshops/${workshop.slug.current}`}>
-              <h2 className="text-xl font-semibold">{workshop.title}</h2>
-              <p>{new Date(workshop.publishedAt).toLocaleDateString()}</p>
-            </Link>
-          </li>
+          <ContentCard
+            key={workshop._id}
+            title={workshop.title}
+            publishedAt={workshop.publishedAt}
+            slug={workshop.slug.current}
+            image={workshop.image}
+            basePath="workshops"
+          />
         ))}
-      </ul>
+      </div>
     </main>
   );
 }

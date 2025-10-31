@@ -44,7 +44,14 @@ export default async function WorkshopPage({
       )}
       <h1 className="text-4xl font-bold mb-8">{workshop.title}</h1>
       <div className="prose">
-        <p>Published: {new Date(workshop.publishedAt).toLocaleDateString()}</p>
+        <p>
+          Published:{" "}
+          {new Date(workshop.publishedAt).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
         {Array.isArray(workshop.body) && <PortableText value={workshop.body} />}
       </div>
     </main>
