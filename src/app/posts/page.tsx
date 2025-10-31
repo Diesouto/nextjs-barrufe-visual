@@ -9,18 +9,18 @@ const POSTS_QUERY = `*[
   && defined(slug.current)
 ]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image}`;
 
-const options = { next: { revalidate: 30 } };
+const options = { next: { revalidate: 60 } };
 
 export default async function PostsPage() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
 
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8">
+    <main className="container mx-auto min-h-screen max-w-6xl p-8">
       <Link href="/" className="hover:underline mb-8 inline-block">
         ← Back to home
       </Link>
       <h1 className="text-4xl font-bold mb-8">Posts</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
           <ContentCard
             key={post._id}
