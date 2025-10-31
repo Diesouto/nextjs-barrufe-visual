@@ -48,7 +48,7 @@ export function ContentCard({
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-2">{title}</h2>
         <p className="text-gray-600 text-sm">
-          {new Date(publishedAt).toLocaleDateString("en-US", {
+          {new Date(publishedAt).toLocaleDateString("es-ES", {
             year: "numeric",
             month: "long",
             day: "numeric",
