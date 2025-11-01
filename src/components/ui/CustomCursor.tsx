@@ -5,8 +5,16 @@ import { useEffect, useRef, useState } from "react";
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isClicking, setIsClicking] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Check if mobile - only show cursor on desktop
+    if (window.innerWidth < 768) return;
+
+    requestAnimationFrame(() => {
+      setIsVisible(true);
+    });
+
     const cursor = cursorRef.current;
     if (!cursor) return;
 
@@ -34,7 +42,7 @@ export function CustomCursor() {
       ref={cursorRef}
       className={`fixed w-4 h-4 bg-white rounded-full pointer-events-none z-[9999] transition-transform duration-150 ${
         isClicking ? "scale-150" : "scale-100"
-      }`}
+      } ${isVisible ? "opacity-100" : "opacity-0"}`}
       style={{
         transform: "translate(-50%, -50%)",
         mixBlendMode: "difference",

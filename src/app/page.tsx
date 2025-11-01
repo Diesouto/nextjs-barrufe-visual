@@ -16,11 +16,11 @@ export default function IndexPage() {
           <ScrollIndicator />
         </section>
 
-        {/* Posts Section */}
-        <PostsSection />
-
         {/* Workshops Section */}
         <WorkshopsSection />
+
+        {/* Posts Section */}
+        <PostsSection />
       </main>
       <Footer />
     </>
