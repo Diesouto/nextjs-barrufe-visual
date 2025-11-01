@@ -28,11 +28,11 @@ export async function PostsSection() {
             />
           </h2>
           <Link href="/posts" className="text-lg hover:underline text-red-500">
-            View all →
+            Ver todo →
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <ContentCard
               key={post._id}
               title={post.title}
@@ -40,6 +40,7 @@ export async function PostsSection() {
               slug={post.slug.current}
               image={post.image}
               basePath="posts"
+              index={index}
             />
           ))}
         </div>

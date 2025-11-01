@@ -27,7 +27,7 @@ export async function WorkshopsSection() {
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold">
             <AnimatedText
-              text="Workshops"
+              text="Obradoiros"
               className="swanky-and-moo-moo-regular uppercase"
             />
           </h2>
@@ -35,11 +35,11 @@ export async function WorkshopsSection() {
             href="/workshops"
             className="text-lg hover:underline text-red-500"
           >
-            View all →
+            Ver todo →
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {workshops.map((workshop) => (
+          {workshops.map((workshop, index) => (
             <ContentCard
               key={workshop._id}
               title={workshop.title}
@@ -47,6 +47,7 @@ export async function WorkshopsSection() {
               slug={workshop.slug.current}
               image={workshop.image}
               basePath="workshops"
+              index={index}
             />
           ))}
         </div>
