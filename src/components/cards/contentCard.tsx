@@ -30,7 +30,7 @@ export function ContentCard({
   return (
     <Link
       href={`/${basePath}/${slug}`}
-      className="block hover:shadow-lg transition-shadow rounded-lg overflow-hidden border border-gray-200"
+      className="block hover:scale-105 transition-all duration-300 rounded-lg overflow-hidden border border-gray-200 bg-white"
     >
       {imageUrl ? (
         <Image
@@ -45,7 +45,7 @@ export function ContentCard({
           <span className="text-gray-400">No image</span>
         </div>
       )}
-      <div className="p-4">
+      <div className="p-4 text-black">
         <h2 className="text-xl font-semibold mb-2">{title}</h2>
         <p className="text-gray-600 text-sm">
           {new Date(publishedAt).toLocaleDateString("es-ES", {

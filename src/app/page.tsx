@@ -1,39 +1,28 @@
-import Link from "next/link";
+import { TitleExperiment } from "@/components/titles/titleExperiment";
+import { PostsSection } from "@/components/sections/PostsSection";
+import { WorkshopsSection } from "@/components/sections/WorkshopsSection";
+import { Navigation } from "@/components/navigation/Navigation";
+import { ScrollIndicator } from "@/components/ui/ScrollIndicator";
+import { Footer } from "@/components/navigation/Footer";
 
 export default function IndexPage() {
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8">
-      <h1 className="text-4xl font-bold mb-8">Welcome to My Site</h1>
-
-      <div className="flex flex-col gap-8">
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Content Categories</h2>
-          <ul className="flex flex-col gap-4">
-            <li>
-              <Link
-                href="/posts"
-                className="text-xl hover:underline text-blue-600"
-              >
-                📝 Posts →
-              </Link>
-              <p className="text-gray-600">
-                Read our latest articles and updates
-              </p>
-            </li>
-            <li>
-              <Link
-                href="/workshops"
-                className="text-xl hover:underline text-blue-600"
-              >
-                🎓 Workshops →
-              </Link>
-              <p className="text-gray-600">
-                Explore our workshops and training sessions
-              </p>
-            </li>
-          </ul>
+    <>
+      <Navigation />
+      <main className="w-full">
+        {/* Hero Section with Animated Title */}
+        <section className="w-full h-screen bg-white text-black relative overflow-hidden flex items-center justify-center">
+          <TitleExperiment title="Barrufe Visual" />
+          <ScrollIndicator />
         </section>
-      </div>
-    </main>
+
+        {/* Posts Section */}
+        <PostsSection />
+
+        {/* Workshops Section */}
+        <WorkshopsSection />
+      </main>
+      <Footer />
+    </>
   );
 }
