@@ -1,6 +1,7 @@
 import { TitleExperiment } from "@/components/titles/titleExperiment";
 import { PostsSection } from "@/components/sections/PostsSection";
 import { WorkshopsSection } from "@/components/sections/WorkshopsSection";
+import { AboutSection } from "@/components/sections/AboutSection";
 import { Navigation } from "@/components/navigation/Navigation";
 import { ScrollIndicator } from "@/components/ui/ScrollIndicator";
 import { Footer } from "@/components/navigation/Footer";
@@ -21,6 +22,9 @@ export default function IndexPage() {
 
         {/* Posts Section */}
         <PostsSection />
+
+        {/* About Section */}
+        <AboutSection />
       </main>
       <Footer />
     </>
