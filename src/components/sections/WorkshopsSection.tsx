@@ -26,7 +26,10 @@ export async function WorkshopsSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold">
-            <AnimatedText text="Workshops" />
+            <AnimatedText
+              text="Workshops"
+              className="swanky-and-moo-moo-regular uppercase"
+            />
           </h2>
           <Link
             href="/workshops"

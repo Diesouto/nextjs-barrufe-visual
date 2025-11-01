@@ -39,3 +39,16 @@ img {
   -webkit-user-drag: none;
   pointer-events: none;
 }
+
+.paper-bg {
+  background-image: url("../../public/paper_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: lighten;
+}
+
+.swanky-and-moo-moo-regular {
+  font-family: "Swanky and Moo Moo", cursive;
+  font-weight: 400;
+  font-style: normal;
+}

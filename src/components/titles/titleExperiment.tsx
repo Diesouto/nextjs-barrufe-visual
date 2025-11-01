@@ -33,11 +33,16 @@ export function TitleExperiment({ title }: TitleExperimentProps) {
 
     const section = containerRef.current.closest("section");
 
-    // Create a single ScrollTrigger for pinning
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "+=200vh",
+    // Create a master timeline with ScrollTrigger (this handles both pinning and animation)
+    const masterTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=200vh", // Stay pinned and animate for 2 viewport heights
+        scrub: 0.5,
+        pin: true,
+        immediateRender: true,
+      },
     });
 
     // Animate each character on scroll
@@ -46,22 +51,13 @@ export function TitleExperiment({ title }: TitleExperimentProps) {
 
       // Each character changes font multiple times based on scroll
       const fontChanges = 8; // Number of font changes per character
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=200vh",
-          scrub: 0.5,
-          immediateRender: true,
-        },
-      });
 
       // Create multiple font changes for each character
       for (let i = 0; i < fontChanges; i++) {
         const progress = i / fontChanges;
         const fontIndex = (index + i) % fonts.length;
 
-        timeline.to(
+        masterTimeline.to(
           char,
           {
             fontFamily: fonts[fontIndex],
@@ -74,7 +70,7 @@ export function TitleExperiment({ title }: TitleExperimentProps) {
       }
 
       // Add some scale and rotation variations
-      timeline.to(
+      masterTimeline.to(
         char,
         {
           scale: 1 + Math.sin(index) * 0.2,
@@ -94,11 +90,11 @@ export function TitleExperiment({ title }: TitleExperimentProps) {
   return (
     <div
       ref={containerRef}
-      className="w-full h-screen flex items-center justify-center"
+      className="w-full h-screen flex items-center justify-center paper-bg"
     >
       <h1
         ref={titleRef}
-        className="text-[12vw] font-bold text-center px-4"
+        className="text-[12vw] font-bold text-center px-4 swanky-and-moo-moo-regular"
         style={{ letterSpacing: "0.02em", lineHeight: "1" }}
       >
         {[...title].map((char, index) => {

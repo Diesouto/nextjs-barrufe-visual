@@ -22,7 +22,10 @@ export async function PostsSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold">
-            <AnimatedText text="Posts" />
+            <AnimatedText
+              text="Posts"
+              className="swanky-and-moo-moo-regular uppercase"
+            />
           </h2>
           <Link href="/posts" className="text-lg hover:underline text-red-500">
             View all →
