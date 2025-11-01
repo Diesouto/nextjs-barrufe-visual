@@ -6,10 +6,16 @@ export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    // Check if mobile - only show cursor on desktop
-    if (window.innerWidth < 768) return;
+    // Client-side only detection to prevent hydration mismatch
+    setIsMounted(true);
+    const checkDesktop = window.innerWidth >= 1024;
+    setIsDesktop(checkDesktop);
+
+    if (!checkDesktop) return;
 
     requestAnimationFrame(() => {
       setIsVisible(true);
@@ -36,6 +42,12 @@ export function CustomCursor() {
       window.removeEventListener("mousedown", handleMouseDown);
     };
   }, []);
+
+  // Don't render until mounted (avoids hydration mismatch)
+  if (!isMounted) return null;
+
+  // Don't render on tablet or mobile
+  if (!isDesktop) return null;
 
   return (
     <div

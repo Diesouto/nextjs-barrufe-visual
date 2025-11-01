@@ -94,30 +94,36 @@ export function TitleExperiment({ title }: TitleExperimentProps) {
     >
       <h1
         ref={titleRef}
-        className="text-[12vw] font-bold text-center px-4 swanky-and-moo-moo-regular"
+        className="text-[12vw] font-bold text-center px-4 swanky-and-moo-moo-regular flex flex-col lg:flex-row lg:gap-[0.5vw]"
         style={{ letterSpacing: "0.02em", lineHeight: "1" }}
       >
-        {[...title].map((char, index) => {
-          const isRed = index === 0;
+        {title.split(" ").map((word, wordIndex) => (
+          <span key={wordIndex} className="inline-block">
+            {[...word].map((char, charIndex) => {
+              const absoluteIndex =
+                wordIndex === 0 ? charIndex : word.length + charIndex + 1;
+              const isRed = absoluteIndex === 0;
 
-          return (
-            <span
-              key={index}
-              ref={(el) => {
-                charsRef.current[index] = el;
-              }}
-              className="inline-block transition-all align-middle"
-              style={{
-                fontFamily: "sans-serif",
-                color: isRed ? "#D71414" : "inherit",
-                lineHeight: "1",
-                verticalAlign: "middle",
-              }}
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          );
-        })}
+              return (
+                <span
+                  key={`${wordIndex}-${charIndex}`}
+                  ref={(el) => {
+                    charsRef.current[absoluteIndex] = el;
+                  }}
+                  className="inline-block transition-all align-middle"
+                  style={{
+                    fontFamily: "sans-serif",
+                    color: isRed ? "#D71414" : "inherit",
+                    lineHeight: "1",
+                    verticalAlign: "middle",
+                  }}
+                >
+                  {char}
+                </span>
+              );
+            })}
+          </span>
+        ))}
       </h1>
     </div>
   );
